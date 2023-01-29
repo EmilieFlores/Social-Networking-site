@@ -11,54 +11,10 @@ const connectDB = require("./config/database");
 const mainRoutes = require("./routes/main");
 const postRoutes = require("./routes/posts");
 
-
-//Use .env file in config folder
+//Use .env file in config folder 
 require("dotenv").config({ path: "./config/.env"});
 
-//Passport config 
+// Passport config 
 require("./config/passport")(passport);
 
-//connect to Database
-connectDB();
-
-//Using EJS for views 
-app.set("view engine", "ejs");
-
-//static folder
-app.use(express.static("public"));
-
-//Body parsing 
-app.use(express.urlencoded({extended: true}));
-app.use(express.json());
-
-//logging
-app.use(logger("dev"));
-
-//Use forms for put/delete 
-app.use(methodOverride("_method"));
-
-//Setup sessions -stored in MongoDb 
-app.use(
-    session({
-        secret: "super secret password",
-        resave: false,
-        saveUninitialized: false,
-        store: new MongoStore({ mongooseConnection: mongoose.connection}),
-    })
-);
-
-//Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
-
-//Use flash messages for errors, info, etc...
-app.use(flash());
-
-//Setup routes for which the server is listening 
-app.use("/", mainRoutes);
-app.use("/post", postRoutes);
-
-//Server running 
-app.listen(process.env.PORT, () => {
-    console.log("Server is running, you better catch it!");
-});
+//Connect to database 
