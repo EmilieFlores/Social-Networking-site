@@ -18,3 +18,46 @@ require("dotenv").config({ path: "./config/.env"});
 require("./config/passport")(passport);
 
 //Connect to database 
+connectDB();
+
+//Using EJS for views 
+app.set("view engine", "ejs");
+
+//Static Folder 
+app.use(express.static("public"));
+
+//Body parsing 
+app.use(express.urlencoded({ extended: true}));
+app.use(express.json());
+
+//Logging 
+app.use(logger("dev"));
+
+//Use forms for put / delete 
+app.use(methodOverride("_method"));
+
+//Setup sessions - stored in MongoDB
+app.use(
+    session({
+        secret: "keyboard cat",
+        resave: false,
+        saveUninitialized: false,
+        store: new MongoStore({mongooseConnection: mongoose.connection}),
+    })
+);
+
+//Passport middleware 
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Use flash messages for errors, info, ect...
+app.use(flash());
+
+//Setup routes for which the server is listening 
+app.use("/", mainRoutes);
+app.use("/post", postRoutes);
+
+//Server running 
+app.listen(process.env.PORT, () => {
+    console.log("Server is running, you better go catch it!");
+});
