@@ -39,9 +39,15 @@ app.use(methodOverride("_method"));
 
 //Setup sessions -stored in MongoDb 
 app.use(
-    
-)
+    session({
+        secret: "super secret password",
+        resave: false,
+        saveUninitialized: false,
+        store: new MongoStore({ mongooseConnection: mongoose.connection}),
+    })
+);
 
+//Passport middleware
 
 
 
