@@ -48,15 +48,17 @@ app.use(
 );
 
 //Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
+//Use flash messages for errors, info, etc...
+app.use(flash());
 
+//Setup routes for which the server is listening 
+app.use("/", mainRoutes);
+app.use("/post", postRoutes);
 
-
-
-
-
-
-
-
-
-
+//Server running 
+app.listen(process.env.PORT, () => {
+    console.log("Server is running, you better catch it!");
+});
