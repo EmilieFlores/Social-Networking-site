@@ -31,7 +31,16 @@ exports.postLogin = (req, res, next) => {
             return next(err);
         }
         if(!user){
-            req.flash("errors", )
+            req.flash("errors", info);
+            return res.redirect("/login");
         }
-    })
-}
+        req.logIn(user,(err) =>{
+            if(err) {
+                return next(err);
+            }
+            req.flash("success", {msg: "Success! You are logged in."});
+            res.redirct(req.session.returnTo || "/profile");
+        });
+    })(requ, res, next);
+};
+
