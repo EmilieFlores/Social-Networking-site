@@ -10,8 +10,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "cloudinary": "^1.33.0",
-    "connect-mongo": "^4.6.0",
+    "connect-mongo": "^3.2.0",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
@@ -26,14 +27,5 @@
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "validator": "^13.7.0"
-  },
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/AaronS16/Social-Media-Site.git"
-  },
-  "bugs": {
-    "url": "https://github.com/AaronS16/Social-Media-Site/issues"
-  },
-  "homepage": "https://github.com/AaronS16/Social-Media-Site#readme"
+  }
 }
