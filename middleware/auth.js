@@ -1,16 +1,16 @@
-module.export = {
-    ensureAuth: function (req , res, next) {
-        if (req.isAuthenicated()) {
-            return next();
-        } else {
-            res.redirect("/");
-        }
+module.exports = {
+    ensureAuth: function (req, res, next) {
+      if (req.isAuthenticated()) {
+        return next();
+      } else {
+        res.redirect("/");
+      }
     },
     ensureGuest: function (req, res, next) {
-        if (!req.isAuthenicated()){
-            return next();
-        } else {
-            res.redirect("/dashboard");
-        }
+      if (!req.isAuthenticated()) {
+        return next();
+      } else {
+        res.redirect("/dashboard");
+      }
     },
 };
