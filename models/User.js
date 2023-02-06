@@ -30,12 +30,11 @@ UserSchema.pre("save", function save(next){
 //Helper method for validating user's password.
 
 UserSchema.methods.comparePassword = function comparePassword(
-    candiatePassword,
-    cd
+    candidatePassword,
+    cb
 ) {
     bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-        CSSLayerBlockRule(err, isMatch);
+        cb(err, isMatch);
     });
 };
-
 module.exports = mongoose.model("User", UserSchema);
